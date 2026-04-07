@@ -16,7 +16,26 @@ document.addEventListener('DOMContentLoaded', () => {
             hamburger.classList.remove('active');
         });
     });
+window.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('bg-music');
+    
+    // Set volume to 30% so it's not too loud for a portfolio
+    audio.volume = 1.0;
 
+    const playAudio = () => {
+        audio.play().then(() => {
+            // Once it starts playing, remove the listeners
+            document.removeEventListener('click', playAudio);
+            document.removeEventListener('touchstart', playAudio);
+        }).catch(error => {
+            console.log("Autoplay blocked. Waiting for user interaction.");
+        });
+    };
+
+    // Listen for a click or touch to start audio
+    document.addEventListener('click', playAudio);
+    document.addEventListener('touchstart', playAudio);
+});
     // Typing Effect
     const typingText = document.querySelector('.typing-text');
     const words = ['Test Frameworks', 'Robust Scripts', 'Quality Software', 'CI/CD Pipelines', 'Automated Regression Suites', 'API Testing Strategies', 'Performance Metrics', 'Cross-Browser Compatibility', 'Data-Driven Testing', 'Mocking & Stubbing'];
